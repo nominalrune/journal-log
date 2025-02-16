@@ -1,49 +1,39 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
-
-function Hello() {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-}
+import Dashboard from './pages/Dashboard';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import UserShow from './pages/users/Show';
+import UserList from './pages/users/List';
+import LogShow from './pages/logs/Show';
+import LogList from './pages/logs/List';
+import ProjectShow from './pages/projects/Show';
+import ProjectList from './pages/projects/List';
+import Layout from './features/common/components/layout/Layout';
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Hello />} />
+        <Route element={<Layout/>}>
+          <Route path="/" element={<Dashboard/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/users">
+            <Route index element={<UserList/>} />
+            <Route path="/:userId" element={<UserShow/>} />
+          </Route>
+          <Route path="/logs">
+            <Route index element={<LogList/>} />
+            <Route path="/:logId" element={<LogShow/>} />
+          </Route>
+          <Route path="/projects">
+            <Route index element={<ProjectList/>} />
+            <Route path="/:projectId" element={<ProjectShow/>} />
+          </Route>
+          <Route path="*" element={<div>Not Found</div>} />
+        </Route>
       </Routes>
     </Router>
   );

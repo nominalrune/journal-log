@@ -1,0 +1,277 @@
+# journal-log
+
+## features
+- manage projects
+	- add project
+	- remove project
+	- list projects
+	- view project
+	- edit project
+	- add task to project
+	- remove task from project
+	- list tasks in project
+	- view task in project
+	- edit task in project
+- manage logs
+	- add log
+	- remove log
+	- list logs
+	- view log
+	- edit log
+- manage users
+	- add user
+	- remove user
+	- list users
+	- view user
+	- edit user
+	- add task to user
+	- remove task from user
+	- list tasks in user
+	- view task in user
+	- edit task in user
+
+## data
+- project
+	- name
+	- description
+	- tasks
+	- users
+- tasks
+	- name
+	- description
+	- users
+	- project
+	- parent_task
+	- jobs
+	- status
+	- due_date
+- logs
+	- user
+	- task
+	- date
+	- time
+	- description
+	
+## technologies
+- typescript
+- electron
+- react
+- redux
+- tailwind
+- headlessui
+- react-query
+- prisma(sqlite)
+- react-icons
+- react-hot-toast
+- zod
+- react-hook-form
+- jest
+## directory structure
+- src/
+  - main/
+    - main.ts
+    - menu.ts
+    - preload.ts
+    - util.ts
+    - repository/
+      - UserRepository.ts
+      - ProjectRepository.ts
+      - TaskRepository.ts
+      - LogRepository.ts
+  - renderer/
+      - App.tsx
+      - features/
+        - logs/
+          - components/
+            - Form.tsx
+            - List.tsx
+            - Card.tsx
+          - models/
+            - Log.ts
+          - schema/
+            - LogSchema.ts
+            - NewLogSchema.ts
+            - EditLogSchema.ts
+          - formHooks/
+            - useNewLogForm.ts
+            - useEditLogForm.ts
+        - projects/
+          - components/
+            - Form.tsx
+            - List.tsx
+            - Card.tsx
+          - models/
+            - Project.ts
+          - schema/
+            - ProjectSchema.ts
+            - NewProjectSchema.ts
+            - EditProjectSchema.ts
+          - formHooks/
+            - useNewProjectForm.ts
+            - useEditProjectForm.ts
+        - tasks/
+          - components/
+            - Form.tsx
+            - List.tsx
+            - Card.tsx
+          - models/
+            - Task.ts
+          - schema/
+            - TaskSchema.ts
+            - NewTaskSchema.ts
+            - EditTaskSchema.ts
+          - formHooks/
+            - useNewTaskForm.ts
+            - useEditTaskForm.ts
+        - users/
+          - components/
+            - Form.tsx
+            - List.tsx
+            - Card.tsx
+          - models/
+            - User.ts
+          - schema/
+            - UserSchema.ts
+            - NewUserSchema.ts
+            - EditUserSchema.ts
+          - formHooks/
+            - useNewUserForm.ts
+            - useEditUserForm.ts
+        - auth/
+          - components/
+            - Login.tsx
+            - Register.tsx
+          - schema/
+            - LoginSchema.ts
+            - RegisterSchema.ts
+          - formHooks/
+            - useLogin.ts
+            - useRegister.ts
+          - hooks/
+            - useAuth.ts
+        - common/
+          - components/
+            - layout/
+              - Header.tsx
+              - Sidebar.tsx
+              - Layout.tsx
+            - ui/
+              - Modal/
+                - Modal.tsx
+                - index.ts
+              - Notification/
+                - Notification.tsx
+                - index.ts
+              - Button.tsx
+              - Card.tsx
+              - List.tsx
+              - indicators/
+                - Loading.tsx
+                - SkeletonLine.tsx
+              - forms/
+                - Input.tsx
+                - InputBase.tsx
+                - Select.tsx
+                - Textarea.tsx
+                - Checkbox.tsx
+                - Radio.tsx
+                - Form.tsx
+          - hooks/
+            - useAdd.ts
+            - useEdit.ts
+            - useList.ts
+          - types/
+      - index.css
+      - index.ejs
+      - index.tsx
+      - pages/
+        - Dashboard.tsx
+        - logs/
+          - List.tsx
+          - Show.tsx
+        - projects/
+          - List.tsx
+          - Show.tsx
+        - users/
+          - List.tsx
+          - Show.tsx
+        - auth/
+          - Login.tsx
+          - Register.tsx
+      - preload.d.ts
+- tailwind.config.js
+- tsconfig.json
+
+## implementation plan
+- [x] setup electron app
+- [x] setup react app
+- [x] setup prisma
+- [ ] write repositories in main/repository
+  - [ ] UserRepository.ts
+  - [ ] ProjectRepository.ts
+  - [ ] TaskRepository.ts
+  - [ ] LogRepository.ts
+- [ ] write ipc handlers in main
+  - [ ] add project
+  - [ ] remove project
+  - [ ] list projects
+  - [ ] view project
+  - [ ] edit project
+  - [ ] add task to project
+  - [ ] remove task from project
+  - [ ] list tasks in project
+  - [ ] view task in project
+  - [ ] edit task in project
+  - [ ] add log
+  - [ ] remove log
+  - [ ] list logs
+  - [ ] view log
+  - [ ] edit log
+  - [ ] add user
+  - [ ] remove user
+  - [ ] list users
+  - [ ] view user
+  - [ ] edit user
+- [ ] write models in renderer/features, save by sending ipc-message to main
+  - [ ] users/models/User.ts
+    - [ ] static create()
+    - [ ] update()
+    - [ ] delete()
+  - [ ] projects/models/Project.ts
+  - [ ] tasks/models/Task.ts
+  - [ ] logs/models/Log.ts
+- [ ] write schema in renderer/features, using zod
+  - [x] auth/schema/LoginSchema.ts
+  - [x] auth/schema/RegisterSchema.ts
+  - [ ] users/schema/NewUserSchema.ts
+  - [ ] users/schema/EditUserSchema.ts
+  - [ ] projects/schema/NewProjectSchema.ts
+  - [ ] projects/schema/EditProjectSchema.ts
+  - [ ] tasks/schema/NewTaskSchema.ts
+  - [ ] tasks/schema/EditTaskSchema.ts
+  - [ ] logs/schema/NewLogSchema.ts
+  - [ ] logs/schema/EditLogSchema.ts
+- [ ] write formHooks in renderer/features, using react-hook-form
+  - [ ] logs/formHooks/useNewLogForm.ts
+  - [ ] logs/formHooks/useEditLogForm.ts
+  - [ ] projects/formHooks/useNewProjectForm.ts
+  - [ ] projects/formHooks/useEditProjectForm.ts
+  - [ ] tasks/formHooks/useNewTaskForm.ts
+  - [ ] tasks/formHooks/useEditTaskForm.ts
+  - [ ] users/formHooks/useNewUserForm.ts
+  - [ ] users/formHooks/useEditUserForm.ts
+- [ ] write Form Components in renderer/features
+  - [ ] logs/components/Form.tsx
+  - [ ] projects/components/Form.tsx
+  - [ ] tasks/components/Form.tsx
+  - [ ] users/components/Form.tsx
+- [ ] write List Components in renderer/features
+  - [ ] logs/components/List.tsx
+  - [ ] projects/components/List.tsx
+  - [ ] tasks/components/List.tsx
+  - [ ] users/components/List.tsx
+- [ ] write Card Components in renderer/features
+  - [ ] logs/components/Card.tsx
+  - [ ] projects/components/Card.tsx
+  - [ ] tasks/components/Card.tsx
+  - [ ] users/components/Card.tsx

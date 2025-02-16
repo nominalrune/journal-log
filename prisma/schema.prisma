@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  projects Project[]
+  tasks Task[]
+  logs Log[]
+}
+
+model Project {
+  id        Int     @id @default(autoincrement())
+  title     String
+  description   String?
+  owner    User    @relation(fields: [ownerId], references: [id])
+  ownerId  Int
+  tasks    Task[]
+}
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  PENDING
+}
+
+model Task {
+  id        Int     @id @default(autoincrement())
+  status    TaskStatus
+  title     String
+  description  String?
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  parent Task? @relation("TaskToTask", fields: [parentId], references: [id])
+  parentId Int?
+  children Task[] @relation("TaskToTask")
+  logs Log[]
+  assignedTo User? @relation(fields: [assignedToId], references: [id])
+  assignedToId Int?
+}
+
+model Log {
+  id        Int     @id @default(autoincrement())
+  task      Task    @relation(fields: [taskId], references: [id])
+  taskId    Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
