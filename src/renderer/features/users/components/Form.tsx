@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
-import useNewUserForm from '../formHooks/useNewUserForm';
+import useNewUserForm from '../hooks/useNewUserForm';
 import Input from '../../common/components/ui/forms/Input';
-import Button from '../../common/components/ui/Button';
+import Button from '../../common/components/ui/buttons/Button';
 
 const UserForm = () => {
   const methods = useNewUserForm();

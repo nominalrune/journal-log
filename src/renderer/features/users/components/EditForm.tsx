@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
-import useEditUserForm from '../formHooks/useEditUserForm';
+import useEditUserForm from '../hooks/useEditUserForm';
 import Input from '../../common/components/ui/forms/Input';
-import Button from '../../common/components/ui/Button';
+import Button from '../../common/components/ui/buttons/Button';
 
 const EditUserForm = () => {
   const methods = useEditUserForm();

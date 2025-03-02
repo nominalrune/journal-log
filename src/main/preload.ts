@@ -2,10 +2,17 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = 'ipc-example';
+export type Channels = 'add-log' | 'edit-log' | 'remove-log' | 'list-logs' | 'view-log' |
+  'add-project' | 'edit-project' | 'remove-project' | 'list-projects' | 'view-project' |
+  'add-task' | 'edit-task' | 'remove-task' | 'list-tasks' | 'view-task' |
+  'add-user' | 'edit-user' | 'remove-user' | 'list-users' | 'view-user';
 
 const electronHandler = {
+  // prisma: ()=>new PrismaClient(),
   ipcRenderer: {
+    invoke(channel: Channels, ...args: unknown[]) {
+      return ipcRenderer.invoke(channel, ...args);
+    },
     sendMessage(channel: Channels, ...args: unknown[]) {
       ipcRenderer.send(channel, ...args);
     },

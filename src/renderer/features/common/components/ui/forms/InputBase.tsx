@@ -22,7 +22,7 @@ const InputBase = ({
 		<label htmlFor={id} className={twMerge("text-md text-slate-700", labelClassName)}>
 			{label}
 		</label>
-		<input id={id} className={className} {...rest} />
+		<input id={id} className={twMerge("bg-slate-50 rounded-sm border-none",className)} {...rest} />
 		<div className={twMerge("text-sm text-red-600 ", errorClassName)}>{error}</div>
 	</div>;
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
-import useNewTaskForm from '../formHooks/useNewTaskForm';
+import useNewTaskForm from '../hooks/useNewTaskForm';
 import Input from '../../common/components/ui/forms/Input';
-import Button from '../../common/components/ui/Button';
+import Button from '../../common/components/ui/buttons/Button';
 
 const TaskForm = () => {
   const methods = useNewTaskForm();

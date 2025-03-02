@@ -20,14 +20,14 @@ export function Input({
 	outerClassName,
 	...rest
 }: InputProps & InputBaseProps) {
-	if(["radio", "checkbox"].includes(rest.type??"")){
+	if (["radio", "checkbox"].includes(rest.type ?? "")) {
 		return <label className={twMerge("text-md text-slate-700", labelClassName)}>
-			<input className={className} {...rest} />
+			<input className={twMerge(className)} {...rest} />
 			{label}
 		</label>;
 	}
-	return <div className={twMerge("flex flex-col", outerClassName)}>
-		<label htmlFor={rest.id} className={twMerge("text-md text-slate-700", labelClassName)}>
+	return <div className={twMerge("flex flex-col gap-2", outerClassName)}>
+		<label htmlFor={rest.id} className={twMerge("flex gap-2 text-md text-slate-700", labelClassName)}>
 			{label}
 		</label>
 		<InputBase {...rest} className={className} />
@@ -41,7 +41,7 @@ function InputBase<T extends InputProps>(props: T) {
 	if (isSelectProps(props)) {
 		return <Select {...props} />;
 	}
-	return <input {...props} />;
+	return <input {...props} className={twMerge("bg-slate-50 rounded-sm border-none", props.className)} />;
 };
 function isTextareaProps(props: any): props is TextareaProps {
 	return props.type === 'textarea';

@@ -4,12 +4,15 @@ import { TaskSchema } from '../../tasks/schema/TaskSchema';
 import { LogSchema } from '../../logs/schema/LogSchema';
 
 export const UserSchema = z.object({
-  id: z.number().int(),
+  id: z.coerce.number().int(),
   email: z.string().email(),
   name: z.string().optional(),
-  projects: z.array(ProjectSchema).optional(),
-  tasks: z.array(TaskSchema).optional(),
-  logs: z.array(LogSchema).optional(),
+});
+export const UserSchemaWithRelations = UserSchema.extend({
+  // projects: z.array(ProjectSchema).optional(),
+  // tasks: z.array(TaskSchema).optional(),
+  // logs: z.array(LogSchema).optional(),
 });
 
 export type UserType = z.infer<typeof UserSchema>;
+export type UserTypeWithRelations = z.infer<typeof UserSchemaWithRelations>;

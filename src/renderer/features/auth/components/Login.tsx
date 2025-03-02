@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import LoginSchema from '../schema/LoginSchema';
 import Input from '../../common/components/ui/forms/Input';
-import Button from '../../common/components/ui/Button';
+import Button from '../../common/components/ui/buttons/Button';
 
 const Login = () => {
 	const { register, handleSubmit, formState: { errors } } = useForm({

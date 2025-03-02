@@ -20,3 +20,11 @@ ipcMain.handle('view-user', async (event, id) => {
 ipcMain.handle('edit-user', async (event, id, data) => {
   return await UserRepository.updateUser(id, data);
 });
+
+ipcMain.handle('login', async (event, email, password) => {
+  const user = await UserRepository.getUserByEmail(email);
+  if (user) {
+    return user;
+  }
+  return null;
+});

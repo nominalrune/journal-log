@@ -74,14 +74,13 @@ const configuration: webpack.Configuration = {
               importLoaders: 1,
             },
           },
-          'sass-loader',
           'postcss-loader'
         ],
         include: /\.module\.s?(c|a)ss$/,
       },
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
         exclude: /\.module\.s?(c|a)ss$/,
       },
       // Fonts
@@ -119,12 +118,12 @@ const configuration: webpack.Configuration = {
     ...(skipDLLs
       ? []
       : [
-          new webpack.DllReferencePlugin({
-            context: webpackPaths.dllPath,
-            manifest: require(manifest),
-            sourceType: 'var',
-          }),
-        ]),
+        new webpack.DllReferencePlugin({
+          context: webpackPaths.dllPath,
+          manifest: require(manifest),
+          sourceType: 'var',
+        }),
+      ]),
 
     new webpack.NoEmitOnErrorsPlugin(),
 
@@ -165,9 +164,25 @@ const configuration: webpack.Configuration = {
     }),
   ],
 
+  // node: false,
   node: {
-    __dirname: false,
-    __filename: false,
+    __dirname: "warn-mock",
+    __filename: "warn-mock",
+    global: true,
+  },
+  resolve: {
+    fallback: {
+      fs: false,
+      tls: false,
+      net: false,
+      path: false,
+      zlib: false,
+      http: false,
+      https: false,
+      stream: false,
+      crypto: false,
+      
+    },
   },
 
   devServer: {

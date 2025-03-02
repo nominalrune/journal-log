@@ -15,6 +15,8 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
+import "./ipcHandlers";
+
 class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -48,6 +50,7 @@ const installExtensions = async () => {
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS'];
 
+  console.log('install dev-tool')
   return installer
     .default(
       extensions.map((name) => installer[name]),
@@ -78,10 +81,12 @@ const createWindow = async () => {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      // sandbox: false,
+      // nodeIntegration: true,
     },
   });
 
-  mainWindow.loadURL(resolveHtmlPath('index.html'));
+  mainWindow.loadURL(resolveHtmlPath('index'));
 
   mainWindow.on('ready-to-show', () => {
     if (!mainWindow) {

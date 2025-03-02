@@ -11,30 +11,40 @@ import LogList from './pages/logs/List';
 import ProjectShow from './pages/projects/Show';
 import ProjectList from './pages/projects/List';
 import Layout from './features/common/components/layout/Layout';
+import { Toaster } from 'react-hot-toast';
 
+import { store } from '@/store'
+import { Provider } from 'react-redux'
 export default function App() {
   return (
+    <Provider store={store}>
+    <Toaster />
     <Router>
       <Routes>
         <Route element={<Layout/>}>
           <Route path="/" element={<Dashboard/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/users">
+          <Route path="login" element={<Login/>} />
+          <Route path="register" element={<Register/>} />
+          <Route path="users">
             <Route index element={<UserList/>} />
-            <Route path="/:userId" element={<UserShow/>} />
+            <Route path=":userId" element={<UserShow/>} />
           </Route>
-          <Route path="/logs">
+          <Route path="logs">
             <Route index element={<LogList/>} />
-            <Route path="/:logId" element={<LogShow/>} />
+            <Route path=":logId" element={<LogShow/>} />
           </Route>
-          <Route path="/projects">
+          <Route path="projects">
             <Route index element={<ProjectList/>} />
-            <Route path="/:projectId" element={<ProjectShow/>} />
+            <Route path=":projectId" element={<ProjectShow/>} />
+          </Route>
+          <Route path="users">
+            <Route index element={<UserList/>} />
+            <Route path=":userId" element={<UserShow/>} />
           </Route>
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
       </Routes>
     </Router>
+    </Provider>
   );
 }
